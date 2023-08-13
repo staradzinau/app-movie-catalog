@@ -12,5 +12,6 @@ Laravel is a web application framework with expressive, elegant syntax. We belie
 - Start Laravel Sail: `./vendor/bin/sail up -d`, see details [here](https://laravel.com/docs/10.x/sail#starting-and-stopping-sail)
 - Generate the key for the application: `./vendor/bin/sail artisan key:generate`. [Details](https://laravel.com/docs/10.x/encryption#configuration)
 - Migrate your database: `./vendor/bin/sail artisan migrate`
+- [OPTIONAL] To create 1 default user, seed the app's database with the command  `./vendor/bin/sail artisan db:seed`. Email and password of the newly created user can be found/edited in the `.env` file, see `USER_DEFAULT_EMAIL` and `USER_DEFAULT_PASSWORD`
 - Set up the frontend with 2 consecutive commands: `./vendor/bin/sail npm install` and then `./vendor/bin/sail npm run dev`
 - The application is ready. Available by the `APP_URL` parameter value in the `.env` file ([default](http://localhost/)). Mailpit email testing tool UI: [http://localhost:8025/](http://localhost:8025/)
