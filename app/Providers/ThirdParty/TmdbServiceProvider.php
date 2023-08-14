@@ -5,6 +5,7 @@ namespace App\Providers\ThirdParty;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\Support\DeferrableProvider;
 use Tmdb\Client;
 use Tmdb\Event\BeforeRequestEvent;
 use Tmdb\Event\Listener\Request\AcceptJsonRequestListener;
@@ -16,7 +17,7 @@ use Tmdb\Event\RequestEvent;
 use Tmdb\Token\Api\BearerToken;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 
-class TmdbServiceProvider extends ServiceProvider
+class TmdbServiceProvider extends ServiceProvider implements DeferrableProvider
 {
     /**
      * Register services.
@@ -66,10 +67,14 @@ class TmdbServiceProvider extends ServiceProvider
     }
 
     /**
-     * Bootstrap services.
+     * Get the services provided by the provider.
+     *
+     * @return array<int, string>
      */
-    public function boot(): void
+    public function provides(): array
     {
-        //
+        return [
+            Client::class,
+        ];
     }
 }
