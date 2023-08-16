@@ -52,6 +52,16 @@ class Item extends Model
     ];
 
     /**
+     * The model's default values for attributes.
+     *
+     * @var array
+     */
+    protected $attributes = [
+        self::IS_TRENDING_DAILY => false,
+        self::IS_TRENDING_WEEKLY => false,
+    ];
+
+    /**
      * Retrieve item id
      *
      * @return int

@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace App\Console;
 
@@ -12,6 +13,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule): void
     {
+        //TODO: add update daily and weekly
         // $schedule->command('inspire')->hourly();
     }
 
