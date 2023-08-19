@@ -17,7 +17,7 @@ return new class extends Migration
             function (Blueprint $table) {
                 $table->id(MovieTrendingListItem::ID);
                 $table->timestamps();
-                $table->unsignedInteger(MovieTrendingListItem::MOVIE_ID);
+                $table->unsignedInteger(MovieTrendingListItem::MOVIE_ID)->unique();
                 $table->boolean(MovieTrendingListItem::IS_TRENDING_DAILY);
                 $table->boolean(MovieTrendingListItem::IS_TRENDING_WEEKLY);
             });
