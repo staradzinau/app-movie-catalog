@@ -3,8 +3,10 @@ declare(strict_types=1);
 
 namespace App\Console;
 
+use App\ThirdParty\Tmdb\Trending\Movie\TimeWindow as TmdbTrendingMovieTimeWindowEnum;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
+use App\Console\Commands\Movie\TrendingList\Update as MovieTrendingListUpdateCommand;
 
 class Kernel extends ConsoleKernel
 {
@@ -13,8 +15,18 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule): void
     {
-        //TODO: add update daily and weekly
-        // $schedule->command('inspire')->hourly();
+        $schedule
+            ->command(
+                MovieTrendingListUpdateCommand::class,
+                [TmdbTrendingMovieTimeWindowEnum::DAY]
+            )->dailyAt('00:00')
+        ;
+        $schedule
+            ->command(
+                MovieTrendingListUpdateCommand::class,
+                [TmdbTrendingMovieTimeWindowEnum::WEEK]
+            )->weekly()
+        ;
     }
 
     /**

@@ -7,6 +7,7 @@ use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rules\Enum as EnumValidationRule;
 use App\ThirdParty\Tmdb\Trending\Movie\TimeWindow as TmdbTrendingMovieTimeWindowEnum;
+use App\Jobs\Movie\TrendingList\Update as MovieTrendingListUpdateJob;
 
 class Update extends Command
 {
@@ -45,7 +46,8 @@ class Update extends Command
             return 1;
         }
 
-        //TODO: start processing the job for queue `api-interaction`
+        MovieTrendingListUpdateJob::dispatch(TmdbTrendingMovieTimeWindowEnum::from($timeWindow))
+            ->onQueue('api-interaction');
 
         return 1;
     }
