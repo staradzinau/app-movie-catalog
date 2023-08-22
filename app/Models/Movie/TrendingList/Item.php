@@ -5,6 +5,7 @@ namespace App\Models\Movie\TrendingList;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Carbon;
+use App\Events\Movie\TrendingList\Item\Created as ItemCreatedEvent;
 
 class Item extends Model
 {
@@ -59,6 +60,17 @@ class Item extends Model
     protected $attributes = [
         self::IS_TRENDING_DAILY => false,
         self::IS_TRENDING_WEEKLY => false,
+    ];
+
+    /**
+     * The event map for the model.
+     *
+     * Allows for object-based events for native Eloquent events.
+     *
+     * @var array
+     */
+    protected $dispatchesEvents = [
+        'created' => ItemCreatedEvent::class,
     ];
 
     /**
