@@ -20,6 +20,7 @@ return new class extends Migration
                 $table->string(Movie::HOMEPAGE);
                 $table->string(Movie::BACKDROP_PATH);
                 $table->string(Movie::IMDB_ID);
+                $table->string(Movie::ORIGINAL_TITLE);
                 $table->string(Movie::ORIGINAL_LANGUAGE);
                 $table->text(Movie::OVERVIEW);
                 $table->float(Movie::POPULARITY);
