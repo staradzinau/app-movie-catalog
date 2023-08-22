@@ -42,7 +42,7 @@ class TrendingList
 
     /**
      * For the given time window value,
-     * update the list of trending movies (upsert format)
+     * update the list of trending movies (upsert format) with the data from API
      * Returns the amount of updated list items
      *
      * @param TmdbTrendingMovieTimeWindowEnum $timeWindow
