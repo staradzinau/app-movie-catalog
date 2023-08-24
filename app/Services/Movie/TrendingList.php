@@ -7,6 +7,7 @@ use App\Models\Movie\TrendingList\Item as MovieTrendingListItem;
 use App\ThirdParty\Tmdb\Trending\Movie\TimeWindow as TmdbTrendingMovieTimeWindowEnum;
 use App\ThirdParty\Tmdb\Trending\Movie\Repository as TmdbTrendingMovieRepository;
 use App\ThirdParty\Tmdb\Trending\Movie\Model as TmdbTrendingMovieModel;
+use Illuminate\Database\Eloquent\Builder as EloquentBuilder;
 
 class TrendingList
 {
@@ -65,5 +66,17 @@ class TrendingList
         }
 
         return $updatedItemsCount;
+    }
+
+    /**
+     * Retrieve the movie trending list collection for the given time window
+     *
+     * @param TmdbTrendingMovieTimeWindowEnum $timeWindow
+     * @return EloquentBuilder
+     */
+    public function getList(TmdbTrendingMovieTimeWindowEnum $timeWindow): EloquentBuilder
+    {
+        $flagName = self::TIME_WINDOW_FLAG_MAP[$timeWindow->value];
+        return MovieTrendingListItem::where($flagName, '=' ,true);
     }
 }

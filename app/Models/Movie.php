@@ -5,6 +5,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Carbon;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use App\Models\Movie\TrendingList\Item as MovieTrendingListItem;
 
 class Movie extends Model
 {
@@ -407,5 +409,19 @@ class Movie extends Model
     public function setVoteCount(int $voteCount): Movie
     {
         return $this->setAttribute(self::VOTE_COUNT, $voteCount);
+    }
+
+    /**
+     * Returns the related item of movie trending list
+     *
+     * @return BelongsTo
+     */
+    public function trendingListItem(): BelongsTo
+    {
+        return $this->belongsTo(
+            MovieTrendingListItem::class,
+            self::ID,
+            MovieTrendingListItem::MOVIE_ID,
+        );
     }
 }
