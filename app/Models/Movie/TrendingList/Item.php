@@ -6,6 +6,8 @@ namespace App\Models\Movie\TrendingList;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Carbon;
 use App\Events\Movie\TrendingList\Item\Created as ItemCreatedEvent;
+use App\Models\Movie;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Item extends Model
 {
@@ -197,5 +199,19 @@ class Item extends Model
     public function setDatetimeOfLastUpdate(?Carbon $datetimeOfLastUpdate): Item
     {
         return $this->setAttribute(self::UPDATED_AT, $datetimeOfLastUpdate);
+    }
+
+    /**
+     * Returns the model with details about corresponding movie
+     *
+     * @return HasOne
+     */
+    public function movie(): HasOne
+    {
+        return $this->hasOne(
+            Movie::class,
+            Movie::ID,
+            self::MOVIE_ID
+        );
     }
 }
