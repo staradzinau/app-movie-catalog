@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\View as ViewFacade;
 use App\Models\Movie\TrendingList\Item as MovieTrendingListItem;
 use Tmdb\Helper\ImageHelper as TmdbImageHelper;
 use App\ThirdParty\Tmdb\Trending\Movie\TimeWindow as TmdbTrendingMovieTimeWindowEnum;
+use App\Services\Movie\TrendingList as MovieTrendingListService;
 
 class Grid extends Component
 {
@@ -17,7 +18,8 @@ class Grid extends Component
 
     public function __construct(
         private TmdbImageHelper $tmdbImageHelper,
-        private TmdbTrendingMovieTimeWindowEnum $currentTimeWindow
+        private TmdbTrendingMovieTimeWindowEnum $currentTimeWindow,
+        private MovieTrendingListService $movieTrendingListService
     ) {}
 
     /**
@@ -35,8 +37,7 @@ class Grid extends Component
      */
     public function getMovieTrendingListPaginated(): LengthAwarePaginator
     {
-        //TODO: join trending list + filtration
-        return MovieTrendingListItem::whereIsTrendingDaily(true)
+        return $this->movieTrendingListService->getList($this->getCurrentTimeWindow())
             ->paginate(self::PAGE_SIZE);
     }
 
