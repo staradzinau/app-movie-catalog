@@ -7,12 +7,20 @@
     <x-bladewind.table>
         <x-slot name="header">
             <th>{{ __('Name')}}</th>
+            <th>{{ __('Image')}}</th>
+            <th>{{ __('Rating')}}</th>
         </x-slot>
 
         @foreach ($movieTrendingListPaginated as $movie)
             <tr>
                 <td>
                     {{$movie->getOriginalTitle()}}
+                </td>
+                <td>
+                    <img src="{{$getImageUrl($movie)}}" />
+                </td>
+                <td>
+                    {{$movie->getVoteAverageValue()}}
                 </td>
             </tr>
         @endforeach

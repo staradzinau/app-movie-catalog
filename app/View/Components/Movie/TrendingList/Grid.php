@@ -8,10 +8,15 @@ use Illuminate\View\Component;
 use Illuminate\View\View;
 use Illuminate\Support\Facades\View as ViewFacade;
 use App\Models\Movie;
+use Tmdb\Helper\ImageHelper as TmdbImageHelper;
 
 class Grid extends Component
 {
     private const PAGE_SIZE = 5;
+
+    public function __construct(
+        private TmdbImageHelper $tmdbImageHelper
+    ) {}
 
     /**
      * Render the grid for trending movies list
@@ -28,6 +33,18 @@ class Grid extends Component
      */
     public function getMovieTrendingListPaginated(): LengthAwarePaginator
     {
+        //TODO: join trending list + filtration
         return Movie::paginate(self::PAGE_SIZE);
+    }
+
+    /**
+     * For the given movie, fetch the URL of the image for the grid preview
+     *
+     * @param Movie $movie
+     * @return string
+     */
+    public function getImageUrl(Movie $movie): string
+    {
+        return $this->tmdbImageHelper->getUrl($movie->getPosterPath(), 'w185');
     }
 }
