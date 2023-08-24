@@ -9,23 +9,41 @@
         <x-movie.trending-list.grid.time-window :currentTimeWindow="$getCurrentTimeWindow()"/>
 
         <div class="trending-list grid">
-            <x-bladewind.table>
+            <x-bladewind.table striped="true">
                 <x-slot name="header">
-                    <th>{{ __('Name')}}</th>
-                    <th>{{ __('Image')}}</th>
-                    <th>{{ __('Rating')}}</th>
+                    <th>
+                        <div class="grid place-items-center">
+                            {{ __('Name')}}
+                        </div>
+                    </th>
+                    <th>
+                        <div class="grid place-items-center">
+                            {{ __('Image')}}
+                        </div>
+                    </th>
+                    <th>
+                        <div class="grid place-items-center">
+                            {{ __('Rating')}}
+                        </div>
+                    </th>
                 </x-slot>
 
                 @foreach ($movieTrendingListPaginated as $movieTrendingListItem)
                     <tr>
                         <td>
-                            {{$movieTrendingListItem->movie->getOriginalTitle()}}
+                            <div class="grid place-items-center">
+                                {{$movieTrendingListItem->movie->getOriginalTitle()}}
+                            </div>
                         </td>
                         <td>
-                            <img src="{{$getImageUrl($movieTrendingListItem)}}" />
+                            <div class="grid place-items-center">
+                                <img src="{{$getImageUrl($movieTrendingListItem)}}" />
+                            </div>
                         </td>
                         <td>
-                            {{$movieTrendingListItem->movie->getVoteAverageValue()}}
+                            <div class="grid place-items-center">
+                                {{$movieTrendingListItem->movie->getVoteAverageValue()}}
+                            </div>
                         </td>
                     </tr>
                 @endforeach

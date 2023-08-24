@@ -49,7 +49,7 @@ class Grid extends Component
      */
     public function getImageUrl(MovieTrendingListItem $movieTrendingListItem): string
     {
-        return $this->tmdbImageHelper->getUrl($movieTrendingListItem->movie->getPosterPath(), 'w185');
+        return $this->tmdbImageHelper->getUrl($movieTrendingListItem->movie->getBackdropPath(), 'w185');
     }
 
     /**
