@@ -16,6 +16,8 @@ use Tmdb\Event\Listener\RequestListener;
 use Tmdb\Event\RequestEvent;
 use Tmdb\Token\Api\BearerToken;
 use Symfony\Component\EventDispatcher\EventDispatcher;
+use Tmdb\Repository\ConfigurationRepository as TmdbConfigurationRepository;
+use Tmdb\Model\Configuration;
 
 class TmdbServiceProvider extends ServiceProvider implements DeferrableProvider
 {
@@ -64,6 +66,14 @@ class TmdbServiceProvider extends ServiceProvider implements DeferrableProvider
                 return $client;
             }
         );
+
+        $this->app->singleton(
+            Configuration::class,
+            function (Application $application) {
+                $tmdbConfigurationRepository = $application->make(TmdbConfigurationRepository::class);
+                return $tmdbConfigurationRepository->load();
+            }
+        );
     }
 
     /**
@@ -75,6 +85,7 @@ class TmdbServiceProvider extends ServiceProvider implements DeferrableProvider
     {
         return [
             Client::class,
+            Configuration::class,
         ];
     }
 }
