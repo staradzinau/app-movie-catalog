@@ -11,16 +11,16 @@
             <th>{{ __('Rating')}}</th>
         </x-slot>
 
-        @foreach ($movieTrendingListPaginated as $movie)
+        @foreach ($movieTrendingListPaginated as $movieTrendingListItem)
             <tr>
                 <td>
-                    {{$movie->getOriginalTitle()}}
+                    {{$movieTrendingListItem->movie->getOriginalTitle()}}
                 </td>
                 <td>
-                    <img src="{{$getImageUrl($movie)}}" />
+                    <img src="{{$getImageUrl($movieTrendingListItem)}}" />
                 </td>
                 <td>
-                    {{$movie->getVoteAverageValue()}}
+                    {{$movieTrendingListItem->movie->getVoteAverageValue()}}
                 </td>
             </tr>
         @endforeach

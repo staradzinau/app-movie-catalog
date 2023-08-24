@@ -7,7 +7,7 @@ use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\View\Component;
 use Illuminate\View\View;
 use Illuminate\Support\Facades\View as ViewFacade;
-use App\Models\Movie;
+use App\Models\Movie\TrendingList\Item as MovieTrendingListItem;
 use Tmdb\Helper\ImageHelper as TmdbImageHelper;
 
 class Grid extends Component
@@ -34,17 +34,18 @@ class Grid extends Component
     public function getMovieTrendingListPaginated(): LengthAwarePaginator
     {
         //TODO: join trending list + filtration
-        return Movie::paginate(self::PAGE_SIZE);
+        return MovieTrendingListItem::whereIsTrendingDaily(true)
+            ->paginate(self::PAGE_SIZE);
     }
 
     /**
-     * For the given movie, fetch the URL of the image for the grid preview
+     * For the given movie trending list item, fetch the URL of the image for the grid preview
      *
-     * @param Movie $movie
+     * @param MovieTrendingListItem $movieTrendingListItem
      * @return string
      */
-    public function getImageUrl(Movie $movie): string
+    public function getImageUrl(MovieTrendingListItem $movieTrendingListItem): string
     {
-        return $this->tmdbImageHelper->getUrl($movie->getPosterPath(), 'w185');
+        return $this->tmdbImageHelper->getUrl($movieTrendingListItem->movie->getPosterPath(), 'w185');
     }
 }
