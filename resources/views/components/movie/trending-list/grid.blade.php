@@ -6,7 +6,7 @@
 @if ($movieTrendingListPaginated->total() > 0)
     <div class="movie trending-list container">
 
-        <x-movie.trending-list.grid.time-window />
+        <x-movie.trending-list.grid.time-window :currentTimeWindow="$getCurrentTimeWindow()"/>
 
         <div class="trending-list grid">
             <x-bladewind.table>

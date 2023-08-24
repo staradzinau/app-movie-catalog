@@ -9,13 +9,15 @@ use Illuminate\View\View;
 use Illuminate\Support\Facades\View as ViewFacade;
 use App\Models\Movie\TrendingList\Item as MovieTrendingListItem;
 use Tmdb\Helper\ImageHelper as TmdbImageHelper;
+use App\ThirdParty\Tmdb\Trending\Movie\TimeWindow as TmdbTrendingMovieTimeWindowEnum;
 
 class Grid extends Component
 {
     private const PAGE_SIZE = 5;
 
     public function __construct(
-        private TmdbImageHelper $tmdbImageHelper
+        private TmdbImageHelper $tmdbImageHelper,
+        private TmdbTrendingMovieTimeWindowEnum $currentTimeWindow
     ) {}
 
     /**
@@ -47,5 +49,16 @@ class Grid extends Component
     public function getImageUrl(MovieTrendingListItem $movieTrendingListItem): string
     {
         return $this->tmdbImageHelper->getUrl($movieTrendingListItem->movie->getPosterPath(), 'w185');
+    }
+
+    /**
+     *
+     * Retrieve value of the time window applied
+     *
+     * @return TmdbTrendingMovieTimeWindowEnum
+     */
+    public function getCurrentTimeWindow(): TmdbTrendingMovieTimeWindowEnum
+    {
+        return $this->currentTimeWindow;
     }
 }

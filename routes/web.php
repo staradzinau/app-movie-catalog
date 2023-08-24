@@ -36,7 +36,7 @@ Route::middleware('auth')->group(function () {
         ],
         function () {
             Route::get(
-                '/trending-list/view',
+                '/trending-list/view/{timeWindow?}',
                 [MovieTrendingListController::class, 'view']
             )->name('trending-list.view');
         }
