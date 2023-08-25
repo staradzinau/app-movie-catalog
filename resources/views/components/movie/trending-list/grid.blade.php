@@ -26,6 +26,7 @@
                             {{ __('Rating')}}
                         </div>
                     </th>
+                    <th></th>
                 </x-slot>
 
                 @foreach ($movieTrendingListPaginated as $movieTrendingListItem)
@@ -43,6 +44,13 @@
                         <td>
                             <div class="grid place-items-center">
                                 {{$movieTrendingListItem->movie->getVoteAverageValue()}}
+                            </div>
+                        </td>
+                        <td>
+                            <div class="grid place-items-center">
+                                <x-nav-link :href="$getMovieViewUrl($movieTrendingListItem)" >
+                                    {{ __('View details') }}
+                                </x-nav-link>
                             </div>
                         </td>
                     </tr>

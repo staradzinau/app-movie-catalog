@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Movie\TrendingList as MovieTrendingListController;
+use App\Http\Controllers\MovieController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Redirect;
 
@@ -39,6 +40,10 @@ Route::middleware('auth')->group(function () {
                 '/trending-list/view/{timeWindow?}',
                 [MovieTrendingListController::class, 'view']
             )->name('trending-list.view');
+            Route::get(
+                '/view/{movie}',
+                [MovieController::class, 'view']
+            )->name('view');
         }
     );
 });
