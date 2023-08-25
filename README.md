@@ -15,4 +15,16 @@
 - Set up the frontend with 2 consecutive commands: `./vendor/bin/sail npm install` and then `./vendor/bin/sail npm run dev`
 - The application is ready. Available by the `APP_URL` parameter value in the `.env` file ([default](http://localhost/)). Mailpit email testing tool UI: [http://localhost:8025/](http://localhost:8025/)
 - The details about movies and trendind list is updated automatically in the midnight. To trigger fetching details manually, please, execute the following console command (Sail-version): `./vendor/bin/sail artisan app:movie:trending-list:update {time-window}`, where instead `{time-window}` you should use `day` or `week` to fetch data for corresponding time window
-- When the application is already deployed, following 2 commands would be enough to run the app: `./vendor/bin/sail up -d` and `./vendor/bin/sail npm run dev`
+
+When the application is already deployed, following 2 commands would be enough to run the app: `./vendor/bin/sail up -d` and `./vendor/bin/sail npm run dev`
+
+### Technical details
+
+During the development of the app, [the TMDB official documentation](https://developer.themoviedb.org/docs) has been used: 
+
+To simplify and formalize usage of TMDB, recommended library has been added, [php-tmdb-api](https://github.com/php-tmdb/api). Durig the development process, I haven't faced with API limits regarding frequency of requests
+
+Additional packages were added:
+- [mkocansey/bladewind](https://github.com/mkocansey/bladewind): useful collection of UI components 
+- [barryvdh/laravel-debugbar](https://github.com/barryvdh/laravel-debugbar): powerful debug bar
+- [laravel/breeze](https://github.com/laravel/breeze): official Laravel starter kit to support authentication features
