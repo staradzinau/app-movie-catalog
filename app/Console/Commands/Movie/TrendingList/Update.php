@@ -16,7 +16,7 @@ class Update extends Command
      *
      * @var string
      */
-    protected $signature = 'app:movie:trending-list:update {time-window : Time interval for statistics: daily or weekly}';
+    protected $signature = 'app:movie:trending-list:update {time-window : Time interval for statistics: `day` or `week`}';
 
     /**
      * The console command description.
