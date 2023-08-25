@@ -11,6 +11,7 @@ use App\Models\Movie\TrendingList\Item as MovieTrendingListItem;
 use Tmdb\Helper\ImageHelper as TmdbImageHelper;
 use App\ThirdParty\Tmdb\Trending\Movie\TimeWindow as TmdbTrendingMovieTimeWindowEnum;
 use App\Services\Movie\TrendingList as MovieTrendingListService;
+use Illuminate\Support\Facades\URL;
 
 class Grid extends Component
 {
@@ -61,5 +62,21 @@ class Grid extends Component
     public function getCurrentTimeWindow(): TmdbTrendingMovieTimeWindowEnum
     {
         return $this->currentTimeWindow;
+    }
+
+    /**
+     * Generate URL for the movie detailed view
+     *
+     * @param MovieTrendingListItem $movieTrendingListItem
+     * @return string
+     */
+    public function getMovieViewUrl(MovieTrendingListItem $movieTrendingListItem): string
+    {
+        return URL::route(
+            'movie.view',
+            [
+                'movie' => $movieTrendingListItem->getMovieId()
+            ]
+        );
     }
 }
