@@ -1,5 +1,16 @@
 ## Movie Catalog Application
 
+### Basic description of the application
+
+Sample application, that allows to show to the authentified user the trending list of movies, fetched from [TMDB](https://www.themoviedb.org/)  
+![Movie-trending-list-example.png](Movie-trending-list-example.png)
+The list of key features
+* statistics is fetched and stored in the app's database
+* statistics is updated by schedule (once per day/week), manual update is also possible
+* it's possible to choose trending movies for the current day or the week
+* the list of movies is paginated
+* a separate page with the details of corresponding movie is available
+
 ### Create a local development instance from scratch
 
 - Prerequisites: installed locally [docker](https://docs.docker.com/get-docker/) and [docker-compose](https://docs.docker.com/compose/install/)
@@ -19,6 +30,12 @@
 When the application is already deployed, following 2 commands would be enough to run the app: `./vendor/bin/sail up -d` and `./vendor/bin/sail npm run dev`
 
 ### Technical details
+
+Details over the tech stack used
+* PHP 8.1
+* Laravel 10 with Sanctum, Breeze and Tinker packages.
+* Local dev environment is containerized using Laravel Sail package
+* For the frontend, the Blade is used as templating engine
 
 During the development of the app, [the TMDB official documentation](https://developer.themoviedb.org/docs) has been used: 
 
